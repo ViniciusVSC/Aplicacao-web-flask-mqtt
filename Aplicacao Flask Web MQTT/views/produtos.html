@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Produtos</title>
+    <!-- Add the Bootstrap CSS file -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <style>
+      .custom-card {
+        background: linear-gradient(to bottom right, purple, #8a2be2);
+        color: white;
+        border: none;
+        border-radius: 10px;
+      }
+
+      .custom-card p,
+      .custom-card h5,
+      .custom-card p.card-price {
+        color: white;
+      }
+
+      .custom-navbar {
+        background-color: purple;
+        border-color: purple;
+      }
+
+      .btn.btn-success {
+        color: white;
+        background-color: yellow;
+        border-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
+      <!-- Adicionar um container flex para alinhar os elementos -->
+      <div class="container-fluid d-flex justify-content-between">
+        <!-- Mover o texto para a esquerda -->
+        <div class="flex-grow-1">
+          <a class="navbar-brand text-white">SeguraNois Security</a>
+        </div>
+
+        <!-- Mover os botões de navegação para a direita -->
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for('login.login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login.cadastro') }}">Cadastro</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('listar_clientes.listar_clientes') }}">Listar Clientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('ligar.ligar') }}">Ligar Sensor</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('carrinho.carrinho') }}">
+                <img
+                  src="{{ url_for('static', filename='imagem/carrinho.png') }}"
+                  alt="Carrinho de Compras"
+                  width="30"
+                  height="30"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Add a container to center the content -->
+    <!-- Use the Bootstrap grid system to display the products in rows of 3 -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <!-- Use the Bootstrap card component to display the product -->
+          <div class="card mb-4 mt-3 mx-3 custom-card">
+            <img
+              src="{{ url_for('static', filename='imagem/microcontrolador.png') }}"
+              alt="Microcontrolador"
+              class="card-img-top"
+              height="300"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Microcontrolador</h5>
+              <p class="card-text">R$ 50,00</p>
+              <button
+                class="btn btn-success comprar-btn"
+                onclick="addToCart({ id: 1, nome: 'Microcontrolador', preco: 50.00 })"
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- Use the Bootstrap card component to display the product -->
+          <div class="card mb-4 mt-3 mx-3 custom-card">
+            <img
+              src="{{ url_for('static', filename='imagem/sensor.png') }}"
+              alt="Sensor"
+              class="card-img-top"
+              height="300"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Sensor</h5>
+              <p class="card-text">R$ 25,00</p>
+              <button
+                class="btn btn-success comprar-btn"
+                onclick="addToCart({ id: 2, nome: 'Sensor', preco: 25.00 })"
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- Use the Bootstrap card component to display the product -->
+          <div class="card mb-4 mt-3 mx-3 custom-card">
+            <img
+              src="{{ url_for('static', filename='imagem/buzzer.png') }}"
+              alt="Camera"
+              class="card-img-top"
+              height="300"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Atuador</h5>
+              <p class="card-text">R$ 100,00</p>
+              <button
+                class="btn btn-success comprar-btn"
+                onclick="addToCart({ id: 3, nome: 'Atuador', preco: 100.00 })"
+              >
+                Comprar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add the Bootstrap JS file and your custom JavaScript code -->
+    <script>
+      function addToCart(item) {
+        var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        cartItems.push(item);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        renderCartItems();
+      }
+
+      function renderCartItems() {
+        var cartItemsHtml = "";
+        var cartItems = JSON.parse(localStorage.getItem("cartItems"));
+
+        if (cartItems && cartItems.length > 0) {
+          for (var i = 0; i < cartItems.length; i++) {
+            var item = cartItems[i];
+            cartItemsHtml += "<p>" + item.nome + " - R$ " + item.preco + "</p>";
+          }
+        } else {
+          cartItemsHtml = "<p>O carrinho está vazio.</p>";
+        }
+
+        document.getElementById("carrinho").innerHTML = cartItemsHtml;
+      }
+
+      renderCartItems();
+    </script>
+  </body>
+</html>

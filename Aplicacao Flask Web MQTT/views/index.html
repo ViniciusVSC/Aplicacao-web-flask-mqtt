@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SeguraNois Security</title>
+    <!-- Add the Bootstrap CSS file -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <h1 class="display-4 text-center my-4">SeguraNois Security</h1>
+      <!-- Add the Bootstrap navbar with the bg-dark and navbar-dark classes -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for('login.login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login.cadastro') }}"
+                >Cadastro</a
+              >
+            </li>            
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('produtos.produtos') }}"
+                >Produtos</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="{{ url_for('listar_clientes.listar_clientes') }}"
+                >Listar Clientes</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('ligar.ligar') }}"
+                >Ligar Sensor</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('iot.check_messages') }}"
+                >Listar leitura</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Lista de Dispositivos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="nav-item">
+                  <a class="dropdown-item" href="{{ url_for('listar_dispositivos.listar_sensores') }}">Listar de Sensor</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="{{ url_for('listar_dispositivos.listar_atuadores') }}">Listar de Atuador</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="{{ url_for('listar_dispositivos.listar_microcontroladores') }}">Listar de Microcontolador</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Cadastros de dispositivos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li class="nav-item">
+                  <a class="dropdown-item" href="{{ url_for('cadastro_iot.cadastro_sensor') }}">Cadastro de Sensor</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="{{ url_for('cadastro_iot.cadastro_atuador') }}">Cadastro de Atuador</a>
+                </li>
+                <li class="nav-item">
+                  <a class="dropdown-item" href="{{ url_for('cadastro_iot.cadastro_microcontrolador') }}">Cadastro de Microcontolador</a>
+                </li>
+              </ul>
+            </li>
+            
+              </li>
+            </li>
+          </ul>
+          <a
+            class="navbar-brand ml-auto"
+            href="{{url_for('carrinho.carrinho')}}"
+          >
+            <img
+              src="{{ url_for('static', filename='imagem/carrinho.png') }}"
+              alt="Carrinho de Compras"
+              width="30"
+              height="30"
+            />
+          </a>
+        </div>
+      </nav>
+    </header>
+    <main class="container my-5">
+      <!-- Add the Bootstrap grid system -->
+      <div class="row">
+        <div class="col-md-6">
+          <section id="servicos">
+            <h2>Nossos Serviços</h2>
+            <!-- Add the Bootstrap list group -->
+            <ul class="list-group">
+              <li class="list-group-item">
+                Instalação de sensores de movimento personalizados
+              </li>
+            </ul>
+          </section>
+          <section id="sobre" class="my-5">
+            <h2>Sobre Nós</h2>
+            <!-- Add the Bootstrap card component -->
+            <div class="card">
+              <div class="card-body">
+                Bem-vindo à SeguraNois Security! Somos uma empresa especializada em oferecer soluções de segurança residencial para manter sua casa protegida contra intrusões indesejadas. Nossa linha de produtos inclui um microcontrolador ESP32, um sensor de movimento PIR e um atuador em forma de um buzzer.<br><br>O microcontrolador ESP32 é um dispositivo inteligente e versátil que permite a conectividade e o controle remoto do sistema de segurança. Ele é responsável por receber os dados do sensor de movimento PIR e acionar o atuador buzzer quando ocorrer algum movimento suspeito.
+
+O sensor de movimento PIR é altamente sensível e capaz de detectar até mesmo os menores movimentos dentro da área de cobertura. Ele funciona emitindo raios infravermelhos e detectando as alterações no padrão de calor. Quando o sensor detecta um movimento, ele envia um sinal para o microcontrolador ESP32.<br><br>
+
+O atuador buzzer é ativado pelo microcontrolador ESP32 quando um movimento suspeito é detectado. Ele emite um som de alarme alto e audível para alertar sobre a presença de intrusos e chamar a atenção dos moradores ou vizinhos.<br><br>
+
+Com essa combinação de dispositivos, oferecemos uma solução eficaz para detectar movimentos indesejados e manter sua residência segura. Nossa tecnologia confiável e fácil de usar proporciona tranquilidade e proteção para você e sua família.
+              </div>
+            </div>
+          </section>
+        </div>
+        <div class="col-md-6">
+          <img
+            src="{{ url_for('static', filename='imagem/cyber-security.png') }}"
+            alt="Cyber Security"
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </main>
+    <!-- Add the Bootstrap footer -->
+    <footer class="footer mt-auto py-3 bg-light text-center">
+      <p>Empresa © 2023</p>
+    </footer>
+    <!-- Add the Bootstrap JavaScript file -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>

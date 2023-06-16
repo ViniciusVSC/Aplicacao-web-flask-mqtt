@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listagem de Clientes</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark custom-navbar">
+      <!-- Adicionar um container flex para alinhar os elementos -->
+      <div class="container-fluid d-flex justify-content-between">
+        <!-- Mover o texto para a esquerda -->
+        <div class="flex-grow-1">
+          <a class="navbar-brand text-white">SeguraNois Security</a>
+        </div>
+
+        <!-- Mover os botões de navegação para a direita -->
+        <div>
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url_for('login.login') }}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login.cadastro') }}"
+                >Cadastro</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('ligar.ligar') }}"
+                >Ligar Sensor</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('carrinho.carrinho')}}">
+                <img
+                  src="{{ url_for('static', filename='imagem/carrinho.png') }}"
+                  alt="Carrinho de Compras"
+                  width="30"
+                  height="30"
+                />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- Add a container to center the content -->
+    <div class="container my-5">
+      <h1>Listagem de Clientes</h1>
+    
+      <!-- Tabela para exibir os clientes -->
+      <table id="listar_clientes" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Senha</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cliente in clientes %}
+          <tr>
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nome }}</td>
+            <td>{{ cliente.cpf }}</td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.senha }}</td>
+            <td>
+              {% for telefone in cliente.telefones %}
+                {{ telefone.telefone }}<br>
+              {% endfor %}
+            </td>
+            
+            <td>
+              <a href="{{ url_for('atualizar_cliente.atualizar_cliente', id=cliente.id) }}" class="btn btn-primary btn-sm">Atualizar Cadastro</a>
+              <form method="post" action="{{ url_for('listar_clientes.excluir_cliente', id=cliente.id) }}" style="display:inline">
+                <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>        
+  </body>
+</html>
